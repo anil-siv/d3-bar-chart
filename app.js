@@ -60,14 +60,17 @@ d3.json(
     .style("opacity", 0)
     .style("position", "absolute");
 
-  const mousemove = (event, d, i) => {
+  //modified this function to use mouse event co-ords to position tooltip dynamically
+  const mousemove = (event, d) => {
+    var pageX = event.pageX;
+    var pageY = event.pageY;
+
     const text = d3
       .select("#tooltip")
       .attr("data-date", stringifyDate(d[0]))
       .html("<p>" + stringifyDate(d[0]) + ": $" + d[1].toFixed(2) + " Bn</p>")
-      .style("left", "40vw")
-      .style("top", height - 100 + "px")
-      .style("transform", "translateX(60px)");
+      .style("left", pageX + "px")
+      .style("top", pageY + "px")
   };
 
 //plot chart
